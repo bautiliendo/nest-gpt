@@ -1,7 +1,6 @@
-import { IsString } from "class-validator";
-
+import { IsString } from 'class-validator';
 
 export class ImageVariationDto {
-    @IsString()
-    readonly baseImage: string;
+  @IsString()
+  readonly baseImage: string;
 }

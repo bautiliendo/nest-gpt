@@ -77,24 +77,22 @@ export class GptService {
   }
 
   async imageGeneration(imageGenerationDto: ImageGenerationDto) {
-    return await imageGenerationUseCase( this.openai, {...imageGenerationDto})
+    return await imageGenerationUseCase(this.openai, { ...imageGenerationDto });
   }
 
-  getGeneratedImage( fileName: string ){
+  getGeneratedImage(fileName: string) {
+    const filePath = path.resolve('./', './generated/images/', fileName);
+    const exists = fs.existsSync(filePath);
 
-     const filePath = path.resolve('./','./generated/images/', fileName);
-     const exists = fs.existsSync( filePath );
-
-     if ( !exists ) {
+    if (!exists) {
       throw new NotFoundException('File not found');
-     }
-     console.log({filePath});
+    }
+    console.log({ filePath });
 
-     return filePath;
+    return filePath;
   }
 
-  async generateImageVariation( { baseImage }: ImageVariationDto) {
-    return imageVariationUseCase( this.openai, { baseImage } );
+  async generateImageVariation({ baseImage }: ImageVariationDto) {
+    return imageVariationUseCase(this.openai, { baseImage });
   }
-
 }
